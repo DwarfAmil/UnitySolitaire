@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class Solitaire : MonoBehaviour
 {
+    public Sprite[] cardFaces;
+    public GameObject cardPrefab;
+
     public static string[] suits = new string[] { "C", "D", "H", "S" };
     public static string[] values = new string[] { "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K" };
 
@@ -32,6 +35,8 @@ public class Solitaire : MonoBehaviour
         {
             print(card);
         }
+        
+        SolitaireDeal();
     }
 
     public static List<string> GenerateDeck()
@@ -59,6 +64,21 @@ public class Solitaire : MonoBehaviour
             T temp = list[k];
             list[k] = list[n];
             list[n] = temp;
+        }
+    }
+
+    private void SolitaireDeal()
+    {
+        float yOffset = 0;
+        float zOffset = 0.03f;
+        
+        foreach (var card in deck)
+        {
+            var newCard = Instantiate(cardPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+            newCard.name = card;
+
+            yOffset += 0.1f;
+            zOffset += 0.03f;
         }
     }
 }
